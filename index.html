@@ -69,9 +69,36 @@ img {
 
 <p>Free and open source software solutions for GIS have come a long way in the last several years as tools to handle file I/O, vector analysis, and raster processing have matured. Built on top of many of these libraries are some farily well known options and include <a href="http://www.qgis.org/en/site/">QGIS</a>, <a href="https://grass.osgeo.org/">GRASS</a>, and <a href="http://postgis.net/">PostGIS</a>. During this same time, we have seen the rise of the <a href="https://www.r-project.org/">R Language for Statistical Computing</a> and not to be left behind many of the same libraries are now supported in R. So given all of these options, plus the tools many use provided by <a href="https://www.esri.com">esri</a> there is a rich ecosystem of options for GIS analysts.</p>
 <p>The purpose of this lightning demo is to provide a small taste of GIS capabilities that are available in R. I will run through the set-up required to get going, show examples of reading in and exploring both raster and vector, do some simple analysis, and show some visualization options. As this is a demo, and supposed to be done in 5 minutes, I will likely fail miserably at this. Becuase of that, I have created this page that has all of what I wanted to show in one place so when things go off the ralis, you can follow along later.</p>
-<p><strong>Note: this demo assumes a minimum level of familiarity with R</strong></p>
-<div id="get-r-set-up" class="section level2">
-<h2>Get R set up</h2>
+<p><em>Note: This demo assumes a minimum level of familiarity with R</em></p>
+<div id="get-r-set-up-to-do-gis" class="section level2">
+<h2>Get R set up to do GIS</h2>
+<p>First task is to make sure we have everything in place to do spatial analysis. The core packages that will provide nearly all of the GIS functionality you need on a daily basis are:</p>
+<ul>
+<li><code>sp</code>: provides the base data structure for vector (and other) data. This is the foundation that most GIS in R is built on.</li>
+<li><code>raster</code>: provides the base data strcuture for raster data as well as a bit of visualization and analysis tools. I prefer this over using <code>sp</code> for raster data becuase <code>raster</code> leaves data on disk and does not pull it all in to memory.</li>
+<li><code>rgdal</code>: R client for Geospatial Data Abstraction Library (GDAL) and handles file I/O plus projections. Does require access to GDAL and PROJ.4. These are part of the package on Windows (e.g. trivial to install), but external libraries need to be loaded on Linux and Mac.</li>
+<li><code>rgeos</code>: R client for the Geometry Engine, Open Source (GEOS). This provides vector analysis capabilities. Similar to <code>rgdal</code> external libraries are needed, but are part of Windows binaries and needed for Linux and Mac.</li>
+</ul>
+<p>To get this set up all we need to do is:</p>
+<pre class="r"><code>#if not already installed
+install.packages(c(&quot;sp&quot;,&quot;raster&quot;,&quot;rgdal&quot;,&quot;rgeos&quot;))</code></pre>
+<pre class="r"><code>library(&quot;sp&quot;)
+library(&quot;raster&quot;)</code></pre>
+<pre><code>## Loading required package: methods</code></pre>
+<pre class="r"><code>library(&quot;rgdal&quot;)</code></pre>
+<pre><code>## rgdal: version: 1.0-7, (SVN revision 559)
+##  Geospatial Data Abstraction Library extensions to R successfully loaded
+##  Loaded GDAL runtime: GDAL 1.7.3, released 2010/11/10
+##  Path to GDAL shared files: /usr/share/gdal
+##  GDAL does not use iconv for recoding strings.
+##  Loaded PROJ.4 runtime: Rel. 4.7.1, 23 September 2009, [PJ_VERSION: 461]
+##  Path to PROJ.4 shared files: (autodetected)
+##  Linking to sp version: 1.2-0</code></pre>
+<pre class="r"><code>library(&quot;rgeos&quot;)</code></pre>
+<pre><code>## rgeos version: 0.3-13, (SVN revision 508)
+##  GEOS runtime version: 3.4.2-CAPI-1.8.2 r3921 
+##  Linking to sp version: 1.2-0 
+##  Polygon checking: TRUE</code></pre>
 </div>
 <div id="read-in-data" class="section level2">
 <h2>Read in data</h2>

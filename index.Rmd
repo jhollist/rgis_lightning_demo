@@ -9,9 +9,29 @@ Free and open source software solutions for GIS have come a long way in the last
 
 The purpose of this lightning demo is to provide a small taste of GIS capabilities that are available in R.  I will run through the set-up required to get going, show examples of reading in and exploring both raster and vector, do some simple analysis, and show some visualization options.  As this is a demo, and supposed to be done in 5 minutes, I will likely fail miserably at this.  Becuase of that, I have created this page that has all of what I wanted to show in one place so when things go off the ralis, you can follow along later.
 
-**Note: this demo assumes a minimum level of familiarity with R**
+*Note: This demo assumes a minimum level of familiarity with R*
 
-##Get R set up
+##Get R set up to do GIS
+First task is to make sure we have everything in place to do spatial analysis.  The core packages that will provide nearly all of the GIS functionality you need on a daily basis are:
+
+- `sp`: provides the base data structure for vector (and other) data.  This is the foundation that most GIS in R is built on.
+- `raster`: provides the base data strcuture for raster data as well as a bit of visualization and analysis tools.  I prefer this over using `sp` for raster data becuase `raster` leaves data on disk and does not pull it all in to memory.
+- `rgdal`: R client for Geospatial Data Abstraction Library (GDAL) and handles file I/O plus projections.  Does require access to GDAL and PROJ.4.  These are part of the package on Windows (e.g. trivial to install), but external libraries need to be loaded on Linux and Mac.
+- `rgeos`: R client for the Geometry Engine, Open Source (GEOS).  This provides vector analysis capabilities.  Similar to `rgdal` external libraries are needed, but are part of Windows binaries and needed for Linux and Mac.
+
+To get this set up all we need to do is:
+
+```{r eval = FALSE}
+#if not already installed
+install.packages(c("sp","raster","rgdal","rgeos"))
+```
+
+```{r}
+library("sp")
+library("raster")
+library("rgdal")
+library("rgeos")
+```
 
 ##Read in data
 
