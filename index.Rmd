@@ -5,4 +5,4 @@ date: "11/3/2015"
 output: html_document
 ---
 
-Free and open source software solutions for GIS have come a long way in the last several years as tools to handle file I/O, vector analysis, and raster processing have matured.  Built on top of many of these libraries are some farily well known options and include [QGIS](), [GRASS](), and [PostGIS]().  During this same time, we have seen the rise of the [R Language for Statistical Computing]().   
+Free and open source software solutions for GIS have come a long way in the last several years as tools to handle file I/O, vector analysis, and raster processing have matured.  Built on top of many of these libraries are some farily well known options and include [QGIS](http://www.qgis.org/en/site/), [GRASS](https://grass.osgeo.org/), and [PostGIS](http://postgis.net/).  During this same time, we have seen the rise of the [R Language for Statistical Computing](https://www.r-project.org/).   
