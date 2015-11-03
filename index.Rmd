@@ -1,0 +1,8 @@
+---
+title: "Spatial Data Analysis in R: Lightning Demo!"
+author: "Jeff W. Hollister"
+date: "11/3/2015"
+output: html_document
+---
+
+
