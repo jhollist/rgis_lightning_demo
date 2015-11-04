@@ -7,7 +7,7 @@ output: html_document
 
 Free and open source software solutions for GIS have come a long way in the last several years as tools to handle file I/O, vector analysis, and raster processing have matured.  Built on top of many of these libraries are some farily well known options and include [QGIS](http://www.qgis.org/en/site/), [GRASS](https://grass.osgeo.org/), and [PostGIS](http://postgis.net/).  During this same time, we have seen the rise of the [R Language for Statistical Computing](https://www.r-project.org/) and not to be left behind many of the same libraries are now supported in R.  So given all of these options, plus the tools many use provided by [esri](https://www.esri.com) there is a rich ecosystem of options for GIS analysts.  
 
-The purpose of this lightning demo is to provide a small taste of GIS capabilities that are available in R.  I will run through the set-up required to get going, show examples of reading in and exploring both raster and vector, do some simple analysis, and show some visualization options.  As this is a demo, and supposed to be done in 5 minutes, I will likely fail miserably at this.  Becuase of that, I have created this page that has all of what I wanted to show in one place so when things go off the ralis, you can follow along later.
+The purpose of this lightning demo is to provide a small taste of GIS capabilities that are available in R.  I will run through the set-up required to get going, show examples of reading in and exploring both raster and vector, show some visualization options, and do some simple analysis.  As this is a demo, and supposed to be done in 5 minutes, I will likely fail miserably at this.  Becuase of that, I have created this page that has all of what I wanted to show in one place so when things go off the ralis, you can follow along later.
 
 *Note: This demo assumes a minimum level of familiarity with R*
 
@@ -89,6 +89,67 @@ print(vt_lulc)
 ```
 
 ##Visualize it
+
+We have our data in, we've looked at some of information, but this is all about GIS in R and what would a GIS demo be without some maps.  There are lots of ways to create maps in R and this area is receiveing a lot of development attention.  I'll show three ways to do this: using base tools, using a wrapper around the base tools called `quickmapr` (WARNING: SHAMELESS SELF-PROMOTION), and finally using `leaflet` to map the data.  
+
+I won't spend time on cartography per se, but thought I'd show some examples of maps created in R to show what is possible:
+
+- [London Bike Map](http://spatialanalysis.co.uk/wp-content/uploads/2012/02/bike_ggplot.png)
+- [Facebook Connections](http://paulbutler.org/archives/visualizing-facebook-friends/facebook_map.png)
+
+So, let's first look at our data with base functions.  It is pretty straightforward.
+
+```{r}
+#Plot landcover first
+plot(vt_lulc)
+
+#Now add the towns
+plot(vt_towns, add = TRUE)
+```
+
+Hey, a map!  Simple and easy.  There are many controsl for how this draws, but beyond scope for a 5 minute demo.
+
+But what if I want to interact with this map?  Well, that is what `quickmapr` does.
+
+```{r, eval=FALSE}
+#Get the package
+install.packages("quickmapr")
+library("quickmapr")
+```
+```{r, echo=FALSE,message=FALSE}
+#Get the package
+install.packages("quickmapr")
+library("quickmapr")
+```
+
+With that loaded up we can create the `quickmapr` object and map and then interact with it.
+
+```{r}
+map <- qmap(vt_lulc,vt_towns)
+```
+
+Then a few options for interactions:
+- Zooming with `zi()`,`zo()`, and `ze()`
+- Pan with `p()`
+- Identify with `i()`
+- Label with `l()` (work in progress!)
+
+Last example I'll show is using our data in R, with the `leaflet` package (and javascript library) to build interactive web maps.
+
+Like above, we need the package.
+
+```{r, eval=FALSE}
+#Get the package
+install.packages("leaflet")
+library("leaflet")
+```
+```{r, echo=FALSE,message=FALSE}
+#Get the package
+install.packages("leaflet")
+library("leaflet")
+```
+
+Plus, since this is `leaflet`, projected data is going to be a challenge and we need to get the data into geographic coordinates. 
 
 ##Analyze it
 
