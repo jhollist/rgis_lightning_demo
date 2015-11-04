@@ -125,7 +125,7 @@ library("quickmapr")
 With that loaded up we can create the `quickmapr` object and map and then interact with it.
 
 ```{r}
-map <- qmap(vt_lulc,vt_towns)
+map <- qmap(vt_lulc,vt_towns, prj=FALSE)
 ```
 
 Then a few options for interactions:
