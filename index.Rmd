@@ -118,7 +118,7 @@ library("quickmapr")
 ```
 ```{r, echo=FALSE,message=FALSE}
 #Get the package
-install.packages("quickmapr")
+#install.packages("quickmapr")
 library("quickmapr")
 ```
 
