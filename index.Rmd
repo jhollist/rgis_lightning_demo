@@ -34,12 +34,65 @@ library("rgeos")
 ```
 
 ##Read in data
+First, let's go find some data... Since we are in Burlington, VT we can keep it local and get some data from the [Vermont Center for Geographic Information](http://vcgi.vermont.gov/).  No need to leave our beloved R command line for this either.  
+
+```{r}
+#Get the Town Boundaries
+towns_url <- "http://maps.vcgi.org/gisdata/vcgi/packaged_zips/BoundaryTown_TWNBNDS.zip"
+download.file(towns_url,"vt_towns.zip")
+unzip("vt_towns.zip")
+
+#Get Landcover
+lc_url <-"http://maps.vcgi.org/gisdata/vcgi/packaged_zips/LandLandcov_LCLU.zip"
+download.file(lc_url,"vt_lulc.zip")
+unzip("vt_lulc.zip")
+```
+
+We now have some vector data (the towns) and raster data (the land cover) locally.  How do we pull that into R?  Frist the town boundaries, which are in shapefiles.
+
+```{r}
+#Read in the vector town boundary
+vt_towns <- readOGR(".","Boundary_TWNBNDS_poly")
+```
+
+That wasn't too bad.  Essentially (for shapefiles, anyway) the first argument is the folder where the shapefiles reside and the second argument is the name of the shapefile (without the `.shp` extension).
+
+Rasters are pretty easy too.  In this case we are reading in an Arc Grid file.  Becuase of the unzipping it is buried a bit in the path.
+
+```{r}
+#Read in the raster landcover
+vt_lulc <- raster("lclu/lclu/")
+```
 
 ##Explore that data
+So, not much really happened there.  Let's look around at these just to make sure we got something.
+
+```{r}
+#List the objects in memory
+ls()
+
+#Let's look at the towns
+#Default view (from the raster package, actually)
+vt_towns
+#Summary
+summary(vt_towns)
+#Look at the attributes on the towns
+head(vt_towns)
+#Or the whole thing
+vt_towns@data
+
+#Now for the raster
+vt_lulc
+#Value attribute table
+print(vt_lulc)
+
+```
+
+##Visualize it
 
 ##Analyze it
 
-##Visualize it
+
 
 
 
