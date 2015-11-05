@@ -100,16 +100,16 @@ I won't spend time on cartography per se, but thought I'd show some examples of 
 
 So, let's first look at our data with base functions.  It is pretty straightforward.
 
-```{r}
+```{r, eval = FALSE}
 #Plot landcover first
 plot(vt_lulc)
-```
-
-```{r}
 #Now add the towns
 plot(vt_towns, add = TRUE)
 ```
 
+```{r, echo = FALSE}
+plot(vt_lulc);plot(vt_towns, add = TRUE)
+```
 Hey, a map!  Simple and easy.  There are many controsl for how this draws, but beyond scope for a 5 minute demo.
 
 But what if I want to interact with this map?  Well, that is what `quickmapr` does.
@@ -121,7 +121,9 @@ library("quickmapr")
 ```
 ```{r, echo=FALSE,message=FALSE}
 #Get the package
-install.packages("quickmapr", repo = "https://cran.rstudio.com")
+if(!require(quickmapr)){
+  install.packages("quickmapr", repo = "https://cran.rstudio.com")
+}
 library("quickmapr")
 ```
 
@@ -148,7 +150,9 @@ library("leaflet")
 ```
 ```{r, echo=FALSE,message=FALSE}
 #Get the package
-install.packages("leaflet", repo = "https://cran.rstudio.com")
+if(!require(leaflet)){
+  install.packages("leaflet", repo = "https://cran.rstudio.com")
+}
 library("leaflet")
 ```
 
@@ -171,7 +175,9 @@ map
 ```
 
 ##Analyze it
-Last thing we would expect to be able to do with any GIS is some geospatial analysis.
+Last thing we would expect to be able to do with any GIS is some geospatial analysis.  For this demo we will keep it simple and pull out some land use and landcover summaries for Burlington.
+
+
 
 
 
