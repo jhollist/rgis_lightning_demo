@@ -6,6 +6,7 @@ output: html_document
 ---
 
 ```{r echo=FALSE, message=FALSE}
+library(knitr)
 purl("index.Rmd")
 ```
 [Just the Code](index.R)
@@ -244,7 +245,7 @@ unzip("vt_lucodes.zip")
 library(foreign)
 codes <- read.dbf("lucodes/lucodes.dbf")
 values <- merge(values,codes,by.x="values",by.y="CODE")
-knitr::kable(values[,3:4])
+kable(values[,3:4])
 ```
 
 Whew!  Did I finish in 5 minutes.  Most likely not even close.
