@@ -103,7 +103,9 @@ So, let's first look at our data with base functions.  It is pretty straightforw
 ```{r}
 #Plot landcover first
 plot(vt_lulc)
+```
 
+```{r}
 #Now add the towns
 plot(vt_towns, add = TRUE)
 ```
