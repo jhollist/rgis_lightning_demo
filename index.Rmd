@@ -241,7 +241,7 @@ unzip("vt_lucodes.zip")
 library(foreign)
 codes <- read.dbf("lucodes/lucodes.dbf")
 values <- merge(values,codes,by.x="values",by.y="CODE")
-kable(values[,3:4])
+knitr::kable(values[,3:4])
 ```
 
 Whew!  Did I finish in 5 minutes.  Most likely not even close.
