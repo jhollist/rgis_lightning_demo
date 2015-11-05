@@ -104,12 +104,24 @@ I won't spend time on cartography per se, but thought I'd show some examples of 
 
 So, let's first look at our data with base functions.  It is pretty straightforward.
 
-```{r}
+```{r , echo = FALSE, messages = FALSE}
+png("map1.png")
+#Plot landcover first
+plot(vt_lulc)
+#Now add the towns
+plot(vt_towns, add = TRUE)
+dev.off()
+```
+
+
+```{r, eval = FALSE}
 #Plot landcover first
 plot(vt_lulc)
 #Now add the towns
 plot(vt_towns, add = TRUE)
 ```
+
+![map1](map1.png)
 
 Hey, a map!  Simple and easy.  There are many controls for how this draws, but beyond scope for a 5 minute demo.
 
@@ -130,9 +142,17 @@ library("quickmapr")
 
 With that loaded up we can create the `quickmapr` object and map and then interact with it.
 
-```{r}
+```{r , echo = FALSE, messages = FALSE}
+png("map2.png")
+map <- qmap(vt_lulc,vt_towns)
+dev.off()
+```
+
+```{r, eval = FALSE}
 map <- qmap(vt_lulc,vt_towns)
 ```
+
+![map2](map2.png)
 
 Then a few options for interactions:
 - Zooming with `zi()`,`zo()`, and `ze()`
