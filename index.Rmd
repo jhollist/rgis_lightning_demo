@@ -5,6 +5,7 @@ date: "11/3/2015"
 output: html_document
 ---
 
+
 Free and open source software solutions for GIS have come a long way in the last several years as tools to handle file I/O, vector analysis, and raster processing have matured.  Built on top of many of these libraries are some farily well known options and include [QGIS](http://www.qgis.org/en/site/), [GRASS](https://grass.osgeo.org/), and [PostGIS](http://postgis.net/).  During this same time, we have seen the rise of the [R Language for Statistical Computing](https://www.r-project.org/) and not to be left behind many of the same libraries are now supported in R.  So given all of these options, plus the tools many use provided by [esri](https://www.esri.com) there is a rich ecosystem of options for GIS analysts.  
 
 The purpose of this lightning demo is to provide a small taste of GIS capabilities that are available in R.  I will run through the set-up required to get going, show examples of reading in and exploring both raster and vector, show some visualization options, and do some simple analysis.  As this is a demo, and supposed to be done in 5 minutes, I will likely fail miserably at this.  Becuase of that, I have created this page that has all of what I wanted to show in one place so when things go off the ralis, you can follow along later.
@@ -118,7 +119,7 @@ library("quickmapr")
 ```
 ```{r, echo=FALSE,message=FALSE}
 #Get the package
-#install.packages("quickmapr")
+install.packages("quickmapr", repo = "https://cran.rstudio.com")
 library("quickmapr")
 ```
 
@@ -145,11 +146,27 @@ library("leaflet")
 ```
 ```{r, echo=FALSE,message=FALSE}
 #Get the package
-install.packages("leaflet")
+install.packages("leaflet", repo = "https://cran.rstudio.com")
 library("leaflet")
 ```
 
 Plus, since this is `leaflet`, projected data is going to be a challenge and we need to get the data into geographic coordinates. 
+
+```{r}
+proj4 <- CRS("+proj=longlat +datum=NAD83 +no_defs +ellps=GRS80 +towgs84=0,0,0")
+vt_towns_geo <- spTransform(vt_towns,proj4)
+```
+
+Now let's create the `leaflet` map.
+
+```{r}
+map <- leaflet()
+map <- addTiles(map)
+map <- addPolygons(map,data=vt_towns_geo)
+#Not Run: Takes a while.  Does projection behind the scenes.
+#map <- addRasterImage(map, data = vt_lulc)
+map
+```
 
 ##Analyze it
 
