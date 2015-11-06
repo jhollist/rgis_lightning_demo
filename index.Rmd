@@ -63,7 +63,9 @@ Rasters are pretty easy too.  In this case we are reading in an Arc Grid file.  
 
 ```{r}
 #Read in the raster landcover
-vt_lulc <- raster("lclu/lclu/")
+#on linux you can point to the folder
+#windows wants the hdr.adf file
+vt_lulc <- raster("lclu/lclu/hdr.adf")
 ```
 
 ```{r, echo = FALSE}

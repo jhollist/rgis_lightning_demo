@@ -29,7 +29,7 @@ unzip("vt_lulc.zip")
 vt_towns <- readOGR(".","Boundary_TWNBNDS_poly")
 
 #Read in the raster landcover
-vt_lulc <- raster("lclu/lclu/")
+vt_lulc <- raster("lclu/lclu/hdr.adf")
 
 #Clean up some small diffs is p4
 proj4string(vt_lulc)<-proj4string(vt_towns)
