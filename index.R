@@ -105,6 +105,7 @@ plot(burlington_bnd, add = T, lwd = 3)
 values <- getValues(burlington_lulc)
 values <- data.frame(table(values))
 values$Perc <- round(100 * (values$Freq/sum(values$Freq)),1)
+values
 
 #Get lulc Codes from VCGI
 download.file("http://maps.vcgi.org/gisdata/vcgi/products/products_vcgi/lucodes.zip","vt_lucodes.zip")
@@ -114,5 +115,6 @@ library(foreign)
 codes <- read.dbf("lucodes/lucodes.dbf")
 values <- merge(values,codes,by.x="values",by.y="CODE")
 #Format output with markdown
+library(knitr)
 kable(values[,3:4])
 
