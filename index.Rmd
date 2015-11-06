@@ -219,6 +219,8 @@ plot(burlington_bnd, border="red", lwd = 3, add=T)
 
 Now we can use the boundary to clip out the land use/land cover.
 ```{r , echo = FALSE, messages = FALSE}
+burlington_lulc <- crop(vt_lulc,burlington_bnd)
+burlington_lulc <- mask(burlington_lulc,burlington_bnd)
 png("map3.png")
 #Plot landcover first
 plot(burlington_lulc)
@@ -227,8 +229,8 @@ plot(burlington_bnd, add = T, lwd = 3)
 dev.off()
 ```
 
-```{r}
-#First we crop the data: which uses the extent
+```{r, eval=FALSE}
+#First we crop the data: which uses the extent.  This speeds up the mask
 burlington_lulc <- crop(vt_lulc,burlington_bnd)
 #Next we mask which removes lulc outside of town boundary
 burlington_lulc <- mask(burlington_lulc,burlington_bnd)
