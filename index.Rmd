@@ -211,6 +211,9 @@ burlington_bnd
 #And plot it, with a basemap in quickmapr
 burl <- qmap(vt_towns, burlington_bnd, basemap = "1m_aerial", 
              resolution = 600)
+#Or base
+plot(vt_towns)
+plot(burlington_bnd, border="red", lwd = 3, add=T)
 ```
 
 Now we can use the boundary to clip out the land use/land cover.
@@ -221,8 +224,8 @@ burlington_lulc <- crop(vt_lulc,burlington_bnd)
 #Next we mask which removes lulc outside of town boundary
 burlington_lulc <- mask(burlington_lulc,burlington_bnd)
 #And look at the result 
-burl <- qmap(burlington_lulc,burlington_bnd,
-             colors = "black")
+plot(burlington_lulc)
+plot(burlington_bnd, add = T, lwd = 3)
 ```
 
 Last thing to do is summarize our stats:

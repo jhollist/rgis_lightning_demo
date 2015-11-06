@@ -29,7 +29,7 @@ unzip("vt_lulc.zip")
 vt_towns <- readOGR(".","Boundary_TWNBNDS_poly")
 
 #Read in the raster landcover
-vt_lulc <- raster("lclu/lclu/hdr.adf")
+vt_lulc <- raster("lclu/lclu/")#hdr.adf")
 
 #Clean up some small diffs is p4
 proj4string(vt_lulc)<-proj4string(vt_towns)
@@ -66,13 +66,6 @@ plot(vt_lulc)
 plot(vt_towns, add = TRUE)
 
 #Get the package
-install.packages("quickmapr")
-library("quickmapr")
-
-#Create map with quickmapr
-map <- qmap(vt_lulc,vt_towns)
-
-#Get the package
 install.packages("leaflet")
 library("leaflet")
 
@@ -96,9 +89,10 @@ map
 #Use base R indexing to grab just Burlington boudnary
 burlington_bnd <- vt_towns[vt_towns[["TOWNNAME"]] == "BURLINGTON",]
 burlington_bnd
-#And plot it, with all towns and basemap in quickmapr
-burl <- qmap(vt_towns, burlington_bnd, basemap = "1m_aerial",
-             resolution = 600)
+#And plot it, with all towns
+plot(vt_towns)
+plot(burlington_bnd, lwd = 1, add=T)
+
 
 
 #First we crop the data: which uses the extent
