@@ -113,7 +113,7 @@ png("map1.png")
 plot(vt_lulc)
 #Now add the towns
 plot(vt_towns, add = TRUE)
-dev.off()
+graphics.off()
 ```
 
 
@@ -148,7 +148,7 @@ With that loaded up we can create the `quickmapr` object and map and then intera
 ```{r , echo = FALSE, messages = FALSE}
 png("map2.png")
 map <- qmap(vt_lulc,vt_towns)
-dev.off()
+graphics.off()
 ```
 
 ```{r, eval = FALSE}
@@ -226,7 +226,7 @@ png("map3.png")
 plot(burlington_lulc)
 #Now add the towns
 plot(burlington_bnd, add = T, lwd = 3)
-dev.off()
+graphics.off()
 ```
 
 ```{r, eval=FALSE}
