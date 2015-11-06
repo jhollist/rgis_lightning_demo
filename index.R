@@ -29,7 +29,7 @@ unzip("vt_lulc.zip")
 vt_towns <- readOGR(".","Boundary_TWNBNDS_poly")
 
 #Read in the raster landcover
-vt_lulc <- raster("lclu/lclu/")#hdr.adf")
+vt_lulc <- raster("lclu/lclu/hdr.adf")
 
 #Clean up some small diffs is p4
 proj4string(vt_lulc)<-proj4string(vt_towns)
@@ -91,17 +91,15 @@ burlington_bnd <- vt_towns[vt_towns[["TOWNNAME"]] == "BURLINGTON",]
 burlington_bnd
 #And plot it, with all towns
 plot(vt_towns)
-plot(burlington_bnd, lwd = 1, add=T)
-
-
+plot(burlington_bnd, border="red", lwd = 3, add=T)
 
 #First we crop the data: which uses the extent
 burlington_lulc <- crop(vt_lulc,burlington_bnd)
 #Next we mask which removes lulc outside of town boundary
 burlington_lulc <- mask(burlington_lulc,burlington_bnd)
 #And look at the result
-burl <- qmap(burlington_lulc,burlington_bnd,
-             colors = "black")
+plot(burlington_lulc)
+plot(burlington_bnd, add = T, lwd = 3)
 
 #Summarize lulc
 values <- getValues(burlington_lulc)
