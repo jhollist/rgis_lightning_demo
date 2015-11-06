@@ -158,6 +158,7 @@ map <- qmap(vt_lulc,vt_towns)
 ![map2](map2.png)
 
 Then a few options for interactions:
+
 - Zooming with `zi()`,`zo()`, and `ze()`
 - Pan with `p()`
 - Identify with `i()`
@@ -217,6 +218,14 @@ plot(burlington_bnd, border="red", lwd = 3, add=T)
 ```
 
 Now we can use the boundary to clip out the land use/land cover.
+```{r , echo = FALSE, messages = FALSE}
+png("map3.png")
+#Plot landcover first
+plot(burlington_lulc)
+#Now add the towns
+plot(burlington_bnd, add = T, lwd = 3)
+dev.off()
+```
 
 ```{r}
 #First we crop the data: which uses the extent
@@ -227,6 +236,8 @@ burlington_lulc <- mask(burlington_lulc,burlington_bnd)
 plot(burlington_lulc)
 plot(burlington_bnd, add = T, lwd = 3)
 ```
+
+![map3](map3.png)
 
 Last thing to do is summarize our stats:
 
